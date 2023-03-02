@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/all_person"
+        android:title="@string/all_person"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/all_students"
+        android:title="@string/all_students"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/staff"
+        android:title="@string/staff"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/gryffindor"
+        android:title="@string/gryffindor"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/slytherin"
+        android:title="@string/slytherin"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/hufflepuff"
+        android:title="@string/hufflepuff"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/ravenclaw"
+        android:title="@string/ravenclaw"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/spells"
+        android:title="@string/spells"
+        app:showAsAction="never" />
+</menu>

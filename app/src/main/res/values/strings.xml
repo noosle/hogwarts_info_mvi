@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Hogwarts info</string>
+    <string name="all_students">All students</string>
+    <string name="all_person">All person</string>
+    <string name="staff">Staff</string>
+    <string name="spells">Spells</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="birthday_unknown">birthday: unknown</string>
+    <string name="patronus_unknown">patronus: unknown</string>
+    <string name="house_unknown">house: unknown</string>
+    <string name="details">Details</string>
+    <string name="ravenclaw">Ravenclaw</string>
+    <string name="hufflepuff">Hufflepuff</string>
+    <string name="slytherin">Slytherin</string>
+    <string name="gryffindor">Gryffindor</string>
+    <string name="gender">Gender</string>
+    <string name="species">Species</string>
+    <string name="ancestry">Ancestry</string>
+    <string name="eye_colour">Eye colour</string>
+    <string name="hair_colour">Hair colour</string>
+    <string name="actor">Actor</string>
+    <string name="wood">Wood:</string>
+    <string name="core">Core:</string>
+    <string name="length">Length:</string>
+</resources>
