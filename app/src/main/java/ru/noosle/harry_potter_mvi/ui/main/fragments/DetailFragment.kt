@@ -22,6 +22,7 @@ import ru.noosle.harry_potter_mvi.R
 import ru.noosle.harry_potter_mvi.databinding.FragmentDetailBinding
 import ru.noosle.harry_potter_mvi.ui.main.dto.Person
 import ru.noosle.harry_potter_mvi.ui.main.formatHogwartsDate
+import ru.noosle.harry_potter_mvi.ui.main.setInfoText
 
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -61,21 +62,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             person?.let { person ->
                 startEnterTransitionAfterLoadingImage(person.image!!, imageView = image)
                 name.text = person.name
-                if (!person.dateOfBirth.isNullOrEmpty()) {
-                    age.text = "birthday: ${person.dateOfBirth.formatHogwartsDate()}"
-                } else {
-                    age.text = getText(R.string.birthday_unknown)
-                }
-                if (!person.house.isNullOrEmpty()) {
-                    house.text = "house: ${person.house}"
-                } else {
-                    house.text = getText(R.string.house_unknown)
-                }
-                if (!person.patronus.isNullOrEmpty()) {
-                    patronus.text = "patronus: ${person.patronus}"
-                } else {
-                    patronus.text = getText(R.string.patronus_unknown)
-                }
+                age.setInfoText(
+                    "birthday: %s",
+                    person.dateOfBirth?.formatHogwartsDate(),
+                    binding.root.context.getString(R.string.birthday_unknown)
+                )
+                house.setInfoText(
+                    "house: %s",
+                    person.house,
+                    binding.root.context.getString(R.string.house_unknown)
+                )
+                patronus.setInfoText(
+                    "patronus: %s",
+                    person.patronus,
+                    binding.root.context.getString(R.string.patronus_unknown)
+                )
                 if (!person.gender.isNullOrEmpty()) {
                     gender.isVisible = true
                     genderValue.isVisible = true

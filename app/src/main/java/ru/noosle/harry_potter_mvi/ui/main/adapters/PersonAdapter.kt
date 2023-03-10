@@ -15,6 +15,7 @@ import ru.noosle.harry_potter_mvi.R
 import ru.noosle.harry_potter_mvi.databinding.ItemPersonBinding
 import ru.noosle.harry_potter_mvi.ui.main.dto.Person
 import ru.noosle.harry_potter_mvi.ui.main.formatHogwartsDate
+import ru.noosle.harry_potter_mvi.ui.main.setInfoText
 
 class PersonsAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Person, PersonsAdapter.MyViewHolder>(MyDiffUtil) {
@@ -32,33 +33,36 @@ class PersonsAdapter(private val onClickListener: OnClickListener) :
     inner class MyViewHolder(private val binding: ItemPersonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(person: Person?) {
+        fun bind(person: Person) {
             with(binding) {
-                ViewCompat.setTransitionName(image, person?.name)
-                ViewCompat.setTransitionName(name, person?.name + "_name")
-                ViewCompat.setTransitionName(age, person?.name + "_age")
-                ViewCompat.setTransitionName(house, person?.name + "_house")
-                ViewCompat.setTransitionName(patronus, person?.name + "_patronus")
+                ViewCompat.setTransitionName(image, person.name)
+                ViewCompat.setTransitionName(name, person.name + "_name")
+                ViewCompat.setTransitionName(age, person.name + "_age")
+                ViewCompat.setTransitionName(house, person.name + "_house")
+                ViewCompat.setTransitionName(patronus, person.name + "_patronus")
                 Glide.with(image)
-                    .load(person?.image)
+                    .load(person.image)
                     .apply(RequestOptions.circleCropTransform())
                     .error(R.drawable.no_ava)
                     .into(binding.image)
-                name.text = person?.name
-                if (!person?.dateOfBirth.isNullOrEmpty()) {
-                    age.text = "birthday: ${person?.dateOfBirth?.formatHogwartsDate()}"
-                } else {
-                    age.text = binding.root.context.getText(R.string.birthday_unknown)
-                }
-                if (!person?.house.isNullOrEmpty()) {
-                    house.text = "house: ${person?.house}"
-                } else {
-                    house.text = binding.root.context.getText(R.string.house_unknown)
-                }
-                if (!person?.patronus.isNullOrEmpty()) {
-                    patronus.text = "patronus: ${person?.patronus}"
-                } else {
-                    patronus.text = binding.root.context.getText(R.string.patronus_unknown)
+                name.text = person.name
+                age.setInfoText(
+                    "birthday: %s",
+                    person.dateOfBirth?.formatHogwartsDate(),
+                    binding.root.context.getString(R.string.birthday_unknown)
+                )
+                house.setInfoText(
+                    "house: %s",
+                    person.house,
+                    binding.root.context.getString(R.string.house_unknown)
+                )
+                patronus.setInfoText(
+                    "patronus: %s",
+                    person.patronus,
+                    binding.root.context.getString(R.string.patronus_unknown)
+                )
+                itemView.setOnClickListener {
+                    onClickListener.onClick(person, image, name, age, house, patronus)
                 }
             }
         }
@@ -75,16 +79,7 @@ class PersonsAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val person = getItem(position)
-        holder.itemView.setOnClickListener {
-            val image = holder.itemView.findViewById<ImageView>(R.id.image)
-            val name = holder.itemView.findViewById<TextView>(R.id.name)
-            val age = holder.itemView.findViewById<TextView>(R.id.age)
-            val house = holder.itemView.findViewById<TextView>(R.id.house)
-            val patronus = holder.itemView.findViewById<TextView>(R.id.patronus)
-            onClickListener.onClick(person, image, name, age, house, patronus)
-        }
-        holder.bind(person)
+        holder.bind(getItem(position))
     }
 
     class OnClickListener(

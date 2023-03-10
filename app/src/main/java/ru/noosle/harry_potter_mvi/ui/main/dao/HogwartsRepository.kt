@@ -1,6 +1,10 @@
 package ru.noosle.harry_potter_mvi.ui.main.dao
 
-class HogwartsRepository constructor(private val hogwartsService: HogwartsService) {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class HogwartsRepository @Inject constructor(private val hogwartsService: HogwartsService) {
 
     suspend fun getAllPersons() = hogwartsService.getAllPersons()
 
